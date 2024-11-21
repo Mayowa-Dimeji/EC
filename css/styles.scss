@@ -4,14 +4,15 @@ $header-color: #ff0000; // Red for header
 $footer-color: #05021d; // Black for footer
 $gradient-button: linear-gradient(to right, red, blue);
 $text-light: #ffffff;
+$text-color: #333; // Darker gray for text
 
-// Accessibility Font Sizes
-$font-base: 16px; // Base font size
-$font-small: 0.875rem; // Small text
-$font-medium: 1rem; // Medium text
-$font-large: 1.25rem; // Large text
+// Font Sizes
+$font-base: 1rem; // Base font size
+$font-medium: 1.25rem; // Medium text
+$font-large: 1.5rem; // Large text
 $font-heading: 2rem; // Header font size
-$font-subheading: 1.5rem; // Subheading font size
+$font-subheading: 1.75rem; // Subheading font size
+$font-label: 1.5rem; // Larger label size
 
 // General Styles
 body {
@@ -26,14 +27,15 @@ body {
 // Header Styles
 header.bg-header {
   background-color: $header-color;
-  color: $text-light;
-  padding: 1.5rem;
+  color: $text-color;
+  padding: 2rem;
 
   h1 {
     font-size: $font-heading;
     font-weight: bold;
     text-transform: uppercase;
     margin: 0;
+    text-align: center;
   }
 }
 
@@ -41,54 +43,70 @@ header.bg-header {
 footer.bg-footer {
   background-color: $footer-color;
   color: $text-light;
-  padding: 1rem;
+  padding: 2rem;
   text-align: center;
   margin-top: auto;
 
   .footer-logo img {
-    max-width: 150px;
-    margin-bottom: 0.5rem;
+    max-width: 250px; // Ensure logo scales well
+    margin-bottom: 1rem;
   }
 
   p {
-    font-size: $font-small;
+    font-size: $font-medium;
     text-transform: uppercase;
     margin: 0;
+    font-weight: bold;
   }
 }
 
 // Background Image
 .bg-image {
   background-image: url('../img/DOAC.gif'); // Path to your image
-  background-size: cover; // Ensure the background covers the entire area
-  background-repeat: no-repeat; // Prevent tiling
-  background-position: center; // Center the image
-  min-height: 100vh; // Full viewport height
-  overflow-y: auto; // Enable scrolling for overflow
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 // Main Container
 main .container {
-  max-width: 800px; // Limit container width
-  width: 80%; // Occupies 80% of the viewport width
-  min-height: 80%; // Occupies 80% of the viewport height
+  max-width: 900px;
+  width: 90%; // Responsive width for smaller devices
+  min-height: 70%;
   padding: 2rem;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-size: $font-medium;
-  overflow-y: auto; // Allow scrolling inside container
+  overflow-y: auto;
+}
+
+// Labels for Full Name and Email
+label.form-label {
+  font-size: $font-label; // Larger label font
+  font-weight: bold;
+  color: $primary-color; // Consistent color
+}
+
+// Inputs
+input.form-control {
+  padding: 1rem; // Increased padding for readability
+  font-size: $font-medium;
 }
 
 // Gradient Button
 button.btn-gradient {
   background: $gradient-button;
-  color: white; // Ensure text is visible
+  color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: $font-medium;
+  padding: 1rem 2rem;
+  font-size: $font-large;
   border-radius: 5px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
   transition: transform 0.3s ease;
 
   &:hover {
@@ -97,18 +115,51 @@ button.btn-gradient {
   }
 }
 
-// Loader Styles
-.loader-container {
-  display: none; // Hidden by default
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.9);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 9999;
+
+
+
+//second loader styles
+// Slide-In and Slide-Out Animations
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.slide-in {
+  animation: slide-in 0.5s ease-out forwards;
+}
+
+.slide-out {
+  animation: slide-out 0.5s ease-in forwards;
+}
+
+
+// Loader Styling
+
+
+.thank-you-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Center horizontally
+  justify-content: center; // Center vertically
+  gap: 1rem; // Space between elements
 }
 
 .loader {
@@ -118,11 +169,23 @@ button.btn-gradient {
   border-top: 5px solid red;
   border-right: 5px solid blue;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-top: 1rem; // Center loader below countdown
+  animation: spin 2.5s linear infinite;
+  margin-top: 1rem; // Optional margin for spacing
 }
 
-// Animations
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+//end of second loader styles
+// Typing Animation
 @keyframes typing {
   from {
     width: 0;
@@ -138,55 +201,75 @@ button.btn-gradient {
   }
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-// Typing Effect
 #animatedText {
-  font-size: $font-large;
+  font-size: $font-heading;
   font-weight: bold;
   color: $primary-color;
   text-align: center;
-  animation: typing 4s steps(30, end), blink 0.5s step-end infinite;
-  white-space: nowrap; // Prevent wrapping
-  overflow: hidden; // Hide overflow during typing
-  border-right: 2px solid $primary-color; // Simulate typing cursor
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  border-right: 2px solid $primary-color;
+  animation: typing 3s steps(13, end), blink 0.5s step-end infinite;
 }
 
-// Rating Stars
+.subheading {
+  font-size: $font-subheading;
+  font-weight: bold;
+  color: $primary-color;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+// Stars Styling
 .rating-stars {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  align-items: center;
+  gap: 1rem; // Even padding between stars
 
   .star-container {
     text-align: center;
 
     .label {
-      font-size: $font-medium;
-      color: $primary-color;
+      font-size: 1.5rem; // Larger labels
+      font-weight: bold;
+      color: $primary-color; // Match primary theme
     }
 
     .star {
-      font-size: 2rem;
+      font-size: 3rem; // Bigger stars
       cursor: pointer;
-      color: #ccc;
+      color: #ccc; // Default gray color
       transition: color 0.3s ease, transform 0.3s ease;
 
+      // Hover Effect
       &:hover {
         color: #f9c907; // Yellow for hover
         transform: scale(1.2); // Slight zoom
       }
 
+      // Highlight or Selected Effect
       &.highlighted,
       &.selected {
-        color: #f9c907;
+        color: #f9c907; // Yellow for selected or highlighted stars
+      }
+    }
+  }
+}
+
+// Responsive Adjustment for Stars
+@media (max-width: 768px) {
+  .rating-stars {
+    gap: 0.5rem; // Reduce gap for smaller screens
+
+    .star-container {
+      .label {
+        font-size: 1.2rem; // Adjust label size for smaller screens
+      }
+
+      .star {
+        font-size: 2.5rem; // Slightly smaller stars
       }
     }
   }

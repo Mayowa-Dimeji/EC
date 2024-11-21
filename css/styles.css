@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  font-size: 16px;
+  font-size: 1rem;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,31 +9,33 @@ body {
 
 header.bg-header {
   background-color: #ff0000;
-  color: #ffffff;
-  padding: 1.5rem;
+  color: #333;
+  padding: 2rem;
 }
 header.bg-header h1 {
   font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
   margin: 0;
+  text-align: center;
 }
 
 footer.bg-footer {
   background-color: #05021d;
   color: #ffffff;
-  padding: 1rem;
+  padding: 2rem;
   text-align: center;
   margin-top: auto;
 }
 footer.bg-footer .footer-logo img {
-  max-width: 150px;
-  margin-bottom: 0.5rem;
+  max-width: 250px;
+  margin-bottom: 1rem;
 }
 footer.bg-footer p {
-  font-size: 0.875rem;
+  font-size: 1.25rem;
   text-transform: uppercase;
   margin: 0;
+  font-weight: bold;
 }
 
 .bg-image {
@@ -46,25 +48,38 @@ footer.bg-footer p {
 }
 
 main .container {
-  max-width: 800px;
-  width: 80%;
-  min-height: 80%;
+  max-width: 900px;
+  width: 90%;
+  min-height: 70%;
   padding: 2rem;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  font-size: 1rem;
+  font-size: 1.25rem;
   overflow-y: auto;
+}
+
+label.form-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #001f5b;
+}
+
+input.form-control {
+  padding: 1rem;
+  font-size: 1.25rem;
 }
 
 button.btn-gradient {
   background: linear-gradient(to right, red, blue);
   color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
   border-radius: 5px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
   transition: transform 0.3s ease;
 }
 button.btn-gradient:hover {
@@ -72,17 +87,40 @@ button.btn-gradient:hover {
   opacity: 0.9;
 }
 
-.loader-container {
-  display: none;
-  justify-content: center;
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+.slide-in {
+  animation: slide-in 0.5s ease-out forwards;
+}
+
+.slide-out {
+  animation: slide-out 0.5s ease-in forwards;
+}
+
+.thank-you-content {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.9);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 9999;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .loader {
@@ -92,10 +130,18 @@ button.btn-gradient:hover {
   border-top: 5px solid red;
   border-right: 5px solid blue;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 2.5s linear infinite;
   margin-top: 1rem;
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 @keyframes typing {
   from {
     width: 0;
@@ -109,39 +155,42 @@ button.btn-gradient:hover {
     border-right-color: transparent;
   }
 }
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 #animatedText {
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #001f5b;
   text-align: center;
-  animation: typing 4s steps(30, end), blink 0.5s step-end infinite;
   white-space: nowrap;
   overflow: hidden;
+  display: inline-block;
   border-right: 2px solid #001f5b;
+  animation: typing 3s steps(13, end), blink 0.5s step-end infinite;
+}
+
+.subheading {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #001f5b;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 .rating-stars {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
 }
 .rating-stars .star-container {
   text-align: center;
 }
 .rating-stars .star-container .label {
-  font-size: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
   color: #001f5b;
 }
 .rating-stars .star-container .star {
-  font-size: 2rem;
+  font-size: 3rem;
   cursor: pointer;
   color: #ccc;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -152,6 +201,18 @@ button.btn-gradient:hover {
 }
 .rating-stars .star-container .star.highlighted, .rating-stars .star-container .star.selected {
   color: #f9c907;
+}
+
+@media (max-width: 768px) {
+  .rating-stars {
+    gap: 0.5rem;
+  }
+  .rating-stars .star-container .label {
+    font-size: 1.2rem;
+  }
+  .rating-stars .star-container .star {
+    font-size: 2.5rem;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
