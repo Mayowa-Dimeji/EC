@@ -11,13 +11,13 @@ document.addEventListener("DOMContentLoaded", function () {
   function typeEffect() {
     if (isTyping && index < text.length) {
       animatedText.textContent = text.slice(0, ++index);
-      setTimeout(typeEffect, 150); // Typing speed
+      setTimeout(typeEffect, 150);
     } else if (!isTyping && index > 0) {
       animatedText.textContent = text.slice(0, --index);
-      setTimeout(typeEffect, 100); // Deleting speed
+      setTimeout(typeEffect, 100);
     } else {
       isTyping = !isTyping;
-      setTimeout(typeEffect, 1500); // Pause before switching
+      setTimeout(typeEffect, 500);
     }
   }
 
@@ -69,18 +69,18 @@ document.addEventListener("DOMContentLoaded", function () {
       dynamicContent.classList.remove("slide-out");
       dynamicContent.classList.add("slide-in");
 
-      showLoader(); // Show loader during countdown
+      showLoader();
       startCountdown(4, () => {
-        hideLoader(); // Hide loader after countdown
+        hideLoader();
         location.reload(); // Redirect to intro
       });
-    }, 500); // Match slide-out duration
+    }, 500);
   }
 
   // Initialize Stars
   function initializeStars() {
     const starsContainer = document.querySelector(".rating-stars");
-    starsContainer.innerHTML = ""; // Clear existing stars if any
+    starsContainer.innerHTML = "";
 
     for (let i = 1; i <= 5; i++) {
       const starContainer = document.createElement("div");
@@ -176,6 +176,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  initializeStars(); // Initialize stars on load
-  initializeSubmitButton(); // Initialize submit button logic
+  initializeStars();
+  initializeSubmitButton();
 });
