@@ -2,31 +2,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const loader = document.getElementById("loader");
   const dynamicContent = document.getElementById("dynamicContent");
   const textElement = document.getElementById("animatedText");
-  const text = textElement ? textElement.textContent : "";
+
+  // Typing Effect for "We’re all ears!"
+  const text = "We’re all ears!";
   let index = 0;
 
-  // Typing Effect
   function typeEffect() {
     if (index < text.length) {
       textElement.textContent = text.slice(0, ++index);
       setTimeout(typeEffect, 100);
-    } else {
-      setTimeout(deleteEffect, 2000);
     }
   }
 
-  function deleteEffect() {
-    if (index > 0) {
-      textElement.textContent = text.slice(0, --index);
-      setTimeout(deleteEffect, 50);
-    } else {
-      setTimeout(typeEffect, 1000);
-    }
-  }
-
-  if (textElement) {
-    typeEffect();
-  }
+  typeEffect();
 
   // Initialize Stars
   function initializeStars() {
@@ -38,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
       starContainer.className = "star-container text-center";
 
       const label = document.createElement("span");
-      label.className = "label";
+      label.className = "label d-block";
       label.textContent = i;
 
       const star = document.createElement("span");
@@ -76,17 +64,32 @@ document.addEventListener("DOMContentLoaded", function () {
         star.classList.remove("selected");
       }
     });
+
+    let ratingInput = document.getElementById("rating");
+    if (!ratingInput) {
+      ratingInput = document.createElement("input");
+      ratingInput.type = "hidden";
+      ratingInput.id = "rating";
+      ratingInput.name = "rating";
+      document.getElementById("rateForm").appendChild(ratingInput);
+    }
+    ratingInput.value = value;
   }
 
   document.getElementById("submitBtn").addEventListener("click", function () {
     const fullName = document.getElementById("fullName").value.trim();
-    const ratingInput = document.getElementById("rating");
-    const rating = ratingInput ? ratingInput.value : "";
+    const email = document.getElementById("email").value.trim();
+    const rating = document.getElementById("rating")?.value;
 
-    if (!fullName || !rating) {
+    if (!fullName || !email || !rating) {
       alert(
         "Please fill out all fields and select a rating before submitting."
       );
+      return;
+    }
+
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      alert("Please enter a valid email address.");
       return;
     }
 
@@ -106,25 +109,15 @@ document.addEventListener("DOMContentLoaded", function () {
       5: "img/awesome.gif",
     };
 
-    const ratingCategories = {
-      1: "Awful",
-      2: "Bad",
-      3: "Okay",
-      4: "Great",
-      5: "Awesome",
-    };
-
-    const thankYouContent = `
+    dynamicContent.innerHTML = `
       <div class="container text-center">
         <h2>Thank You, ${fullName.split(" ")[0]}!</h2>
         <img src="${gifMap[rating]}" alt="Thank You GIF" class="img-fluid">
         <p>${messages[rating]}</p>
-        <p>Rating: ${rating} - ${ratingCategories[rating]}</p>
         <p id="countdown">Redirecting in 5 seconds...</p>
+        <div class="loader mt-4 mx-auto"></div>
       </div>
     `;
-
-    dynamicContent.innerHTML = thankYouContent;
 
     let countdown = 5;
     const countdownElement = document.getElementById("countdown");
@@ -134,25 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
       countdownElement.textContent = `Redirecting in ${countdown} seconds...`;
       if (countdown === 0) {
         clearInterval(interval);
-
-        dynamicContent.innerHTML = `
-          <p id="animatedText" class="display-5 fw-bold">We’re all ears! How was it for you? Rate us from 1 (awful) to 5 (awesome).</p>
-          <form id="rateForm" class="mt-4">
-            <div class="mb-3">
-              <label for="fullName" class="form-label">Full Name</label>
-              <input type="text" id="fullName" name="fullName" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" name="email" class="form-control" required>
-            </div>
-            <div class="rating-stars d-flex justify-content-center gap-3">
-              <!-- Stars dynamically re-initialized -->
-            </div>
-            <button id="submitBtn" type="button" class="btn btn-gradient mt-4">Submit Your Rating</button>
-          </form>
-        `;
-        initializeStars();
+        location.reload(); // Return to the form
       }
     }, 1000);
   });

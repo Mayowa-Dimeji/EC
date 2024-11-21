@@ -5,29 +5,55 @@ $footer-color: #05021d; // Black for footer
 $gradient-button: linear-gradient(to right, red, blue);
 $text-light: #ffffff;
 
+// Accessibility Font Sizes
+$font-base: 16px; // Base font size
+$font-small: 0.875rem; // Small text
+$font-medium: 1rem; // Medium text
+$font-large: 1.25rem; // Large text
+$font-heading: 2rem; // Header font size
+$font-subheading: 1.5rem; // Subheading font size
+
 // General Styles
 body {
   font-family: Arial, sans-serif;
+  font-size: $font-base;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden; // Prevent horizontal scrolling
 }
 
 // Header Styles
 header.bg-header {
   background-color: $header-color;
   color: $text-light;
-  padding: 1rem;
+  padding: 1.5rem;
 
-  .logo {
-    font-size: 2rem;
+  h1 {
+    font-size: $font-heading;
     font-weight: bold;
+    text-transform: uppercase;
     margin: 0;
   }
+}
 
-  .subheading {
-    font-size: 1.2rem;
-    margin-top: 0.5rem;
+// Footer Styles
+footer.bg-footer {
+  background-color: $footer-color;
+  color: $text-light;
+  padding: 1rem;
+  text-align: center;
+  margin-top: auto;
+
+  .footer-logo img {
+    max-width: 150px;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: $font-small;
+    text-transform: uppercase;
+    margin: 0;
   }
 }
 
@@ -38,9 +64,7 @@ header.bg-header {
   background-repeat: no-repeat; // Prevent tiling
   background-position: center; // Center the image
   min-height: 100vh; // Full viewport height
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow-y: auto; // Enable scrolling for overflow
 }
 
 // Main Container
@@ -52,52 +76,8 @@ main .container {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  font-size: calc(1rem + 0.5vw); // Responsive font scaling
-}
-
-// Footer Styles
-footer.bg-footer {
-  background-color: $footer-color;
-  color: $text-light;
-  padding: 1rem;
-  text-align: center;
-}
-
-// Animated Text
-#animatedText {
-  font-size: calc(1.5rem + 1vw); // Dynamically scales with the viewport
-  color: $primary-color;
-}
-
-// Rating Stars
-.rating-stars {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-
-  .star-container {
-    text-align: center;
-
-    .label {
-      font-size: 0.8rem;
-      color: #333;
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-
-    .star {
-      font-size: 2rem;
-      cursor: pointer;
-      color: #ccc;
-      transition: color 0.3s ease;
-
-      &:hover,
-      &.highlighted,
-      &.selected {
-        color: #f9c907; // Yellow for hover and selected stars
-      }
-    }
-  }
+  font-size: $font-medium;
+  overflow-y: auto; // Allow scrolling inside container
 }
 
 // Gradient Button
@@ -106,7 +86,7 @@ button.btn-gradient {
   color: white; // Ensure text is visible
   border: none;
   padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  font-size: $font-medium;
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -134,11 +114,28 @@ button.btn-gradient {
 .loader {
   width: 50px;
   height: 50px;
-  border: 5px solid rgba(0, 0, 0, 0.1);
+  border: 5px solid rgba(255, 255, 255, 0.3);
   border-top: 5px solid red;
   border-right: 5px solid blue;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  margin-top: 1rem; // Center loader below countdown
+}
+
+// Animations
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-right-color: transparent;
+  }
 }
 
 @keyframes spin {
@@ -147,5 +144,50 @@ button.btn-gradient {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+// Typing Effect
+#animatedText {
+  font-size: $font-large;
+  font-weight: bold;
+  color: $primary-color;
+  text-align: center;
+  animation: typing 4s steps(30, end), blink 0.5s step-end infinite;
+  white-space: nowrap; // Prevent wrapping
+  overflow: hidden; // Hide overflow during typing
+  border-right: 2px solid $primary-color; // Simulate typing cursor
+}
+
+// Rating Stars
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  .star-container {
+    text-align: center;
+
+    .label {
+      font-size: $font-medium;
+      color: $primary-color;
+    }
+
+    .star {
+      font-size: 2rem;
+      cursor: pointer;
+      color: #ccc;
+      transition: color 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        color: #f9c907; // Yellow for hover
+        transform: scale(1.2); // Slight zoom
+      }
+
+      &.highlighted,
+      &.selected {
+        color: #f9c907;
+      }
+    }
   }
 }
