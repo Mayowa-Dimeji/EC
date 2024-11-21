@@ -1,0 +1,128 @@
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header.bg-header {
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 1rem;
+}
+header.bg-header .logo {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+header.bg-header .subheading {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.bg-image {
+  background-image: url("../img/DOAC.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main .container {
+  max-width: 800px;
+  width: 80%;
+  min-height: 80%;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: calc(1rem + 0.5vw);
+}
+
+footer.bg-footer {
+  background-color: #05021d;
+  color: #ffffff;
+  padding: 1rem;
+  text-align: center;
+}
+
+#animatedText {
+  font-size: calc(1.5rem + 1vw);
+  color: #001f5b;
+}
+
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.rating-stars .star-container {
+  text-align: center;
+}
+.rating-stars .star-container .label {
+  font-size: 0.8rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.rating-stars .star-container .star {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s ease;
+}
+.rating-stars .star-container .star:hover, .rating-stars .star-container .star.highlighted, .rating-stars .star-container .star.selected {
+  color: #f9c907;
+}
+
+button.btn-gradient {
+  background: linear-gradient(to right, red, blue);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+button.btn-gradient:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.loader-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid red;
+  border-right: 5px solid blue;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

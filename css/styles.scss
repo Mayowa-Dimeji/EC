@@ -1,0 +1,151 @@
+// Colors
+$primary-color: #001f5b; // Dark blue
+$header-color: #ff0000; // Red for header
+$footer-color: #05021d; // Black for footer
+$gradient-button: linear-gradient(to right, red, blue);
+$text-light: #ffffff;
+
+// General Styles
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Header Styles
+header.bg-header {
+  background-color: $header-color;
+  color: $text-light;
+  padding: 1rem;
+
+  .logo {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .subheading {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+  }
+}
+
+// Background Image
+.bg-image {
+  background-image: url('../img/DOAC.gif'); // Path to your image
+  background-size: cover; // Ensure the background covers the entire area
+  background-repeat: no-repeat; // Prevent tiling
+  background-position: center; // Center the image
+  min-height: 100vh; // Full viewport height
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Main Container
+main .container {
+  max-width: 800px; // Limit container width
+  width: 80%; // Occupies 80% of the viewport width
+  min-height: 80%; // Occupies 80% of the viewport height
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: calc(1rem + 0.5vw); // Responsive font scaling
+}
+
+// Footer Styles
+footer.bg-footer {
+  background-color: $footer-color;
+  color: $text-light;
+  padding: 1rem;
+  text-align: center;
+}
+
+// Animated Text
+#animatedText {
+  font-size: calc(1.5rem + 1vw); // Dynamically scales with the viewport
+  color: $primary-color;
+}
+
+// Rating Stars
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  .star-container {
+    text-align: center;
+
+    .label {
+      font-size: 0.8rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .star {
+      font-size: 2rem;
+      cursor: pointer;
+      color: #ccc;
+      transition: color 0.3s ease;
+
+      &:hover,
+      &.highlighted,
+      &.selected {
+        color: #f9c907; // Yellow for hover and selected stars
+      }
+    }
+  }
+}
+
+// Gradient Button
+button.btn-gradient {
+  background: $gradient-button;
+  color: white; // Ensure text is visible
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+}
+
+// Loader Styles
+.loader-container {
+  display: none; // Hidden by default
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid red;
+  border-right: 5px solid blue;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
